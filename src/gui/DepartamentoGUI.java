@@ -7,12 +7,15 @@ import logico.*;
 
 public class DepartamentoGUI extends javax.swing.JFrame {
     
-    DefaultTableModel table;
-    DepartamentoDAO depD = new DepartamentoDAO();
+    private DefaultTableModel table;
+    private DepartamentoDAO depD;
+    private Departamento depa;
+    
     public DepartamentoGUI() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        depD = new DepartamentoDAO();
         cargar();
     }
     
@@ -34,6 +37,11 @@ public class DepartamentoGUI extends javax.swing.JFrame {
             table.removeRow(i);
             i-=1;
         }
+    }
+    
+    private void inputClear(){
+        clave.setText("");
+        nombre.setText("");
     }
 
     /**
@@ -188,7 +196,7 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        Departamento depa = new Departamento();
+        depa = new Departamento();
 
         depa.setClave(clave.getText());
         depa.setNombre(nombre.getText());
@@ -201,12 +209,11 @@ public class DepartamentoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
 
-        clave.setText("");
-        nombre.setText("");
+        inputClear();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        Departamento depa = new Departamento();
+        depa = new Departamento();
 
         depa.setClave(clave.getText());
         depa.setNombre(nombre.getText());
@@ -219,8 +226,7 @@ public class DepartamentoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
 
-        clave.setText("");
-        nombre.setText("");
+        inputClear();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -232,17 +238,19 @@ public class DepartamentoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
 
-        clave.setText("");
+        inputClear();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Departamento depa = depD.searchById(clave.getText());
-            limpiar();
-            Object [] filas = new Object[2];
-            filas[0] = depa.getClave();
-            filas[1] = depa.getNombre();
+        depa = depD.searchById(clave.getText());
+        limpiar();
+        Object [] filas = new Object[2];
+        filas[0] = depa.getClave();
+        filas[1] = depa.getNombre();
             
-            table.addRow(filas);
+        table.addRow(filas);
+        
+        inputClear();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     

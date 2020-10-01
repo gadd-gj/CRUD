@@ -11,13 +11,15 @@ import logico.*;
 
 public class EmpleadoGUI extends javax.swing.JFrame {
     
-    DefaultTableModel table;
-    EmpleadoDAO empD = new EmpleadoDAO();
+    private DefaultTableModel table;
+    private EmpleadoDAO empD;
+    private Empleado emp;
     
     public EmpleadoGUI() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        empD = new EmpleadoDAO();
         cargar();
     }
     
@@ -41,6 +43,14 @@ public class EmpleadoGUI extends javax.swing.JFrame {
             table.removeRow(i);
             i-=1;
         }
+    }
+    
+    private void inputClear(){
+        clave.setText("");
+        nombre.setText("");
+        direccion.setText("");
+        telefono.setText("");
+        departamento.setText("");
     }
 
     /**
@@ -240,7 +250,7 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        Empleado emp = new Empleado();
+        emp = new Empleado();
 
         emp.setClave(clave.getText());
         emp.setNombre(nombre.getText());
@@ -255,15 +265,11 @@ public class EmpleadoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
         
-        clave.setText("");
-        nombre.setText("");
-        direccion.setText("");
-        telefono.setText("");
-        departamento.setText("");
+        inputClear();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        Empleado emp = new Empleado();
+        emp = new Empleado();
 
         emp.setClave(clave.getText());
         emp.setNombre(nombre.getText());
@@ -279,11 +285,7 @@ public class EmpleadoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
 
-        clave.setText("");
-        nombre.setText("");
-        direccion.setText("");
-        telefono.setText("");
-        departamento.setText("");
+        inputClear();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -295,20 +297,20 @@ public class EmpleadoGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
 
-        clave.setText("");
+        inputClear();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Empleado emp = empD.searchById(clave.getText());
-            limpiar();
-            Object [] filas = new Object[5];
-            filas[0] = emp.getClave();
-            filas[1] = emp.getNombre();
-            filas[2] = emp.getDireccion();
-            filas[3] = emp.getTelefono();
-            filas[4] = emp.getDepartamento();
-            table.addRow(filas);
-        
+        emp = empD.searchById(clave.getText());
+        limpiar();
+        Object [] filas = new Object[5];
+        filas[0] = emp.getClave();
+        filas[1] = emp.getNombre();
+        filas[2] = emp.getDireccion();
+        filas[3] = emp.getTelefono();
+        filas[4] = emp.getDepartamento();
+        table.addRow(filas);
+        inputClear();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     
