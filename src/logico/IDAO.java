@@ -1,6 +1,6 @@
 package logico;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IDAO<T> {
 
@@ -8,10 +8,10 @@ public interface IDAO<T> {
 
     public boolean update(T pojo);
 
-    public T searchById(T pojo);
+    public T searchById(String id);
 
-    public List<T> showAll(T pojo);
+    public ArrayList showAll();
 
-    public boolean delete(T pojo);
+    public boolean delete(String id);
 
 }

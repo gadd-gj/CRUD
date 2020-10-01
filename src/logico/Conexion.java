@@ -1,6 +1,6 @@
 package logico;
 
-import gui.CRUD;
+import gui.EmpleadoGUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,7 +31,7 @@ public class Conexion {
         try {
             Class.forName(jdbc_drive);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmpleadoGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -39,10 +39,13 @@ public class Conexion {
             System.out.println("Conexion Exitosa :D");
 
         } catch (SQLException ex) {
-            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmpleadoGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public static Connection getConnection(){
+        return conex;
+    }
     public boolean execute(String sql) {
         boolean res = false;
         try {

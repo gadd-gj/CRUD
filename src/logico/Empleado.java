@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logico;
 
-/**
- *
- * @author gaddiel
- */
 public class Empleado {
 
     private String clave;
     private String nombre;
     private String direccion;
     private String telefono;
-    private Departamento departamento;
+    private String departamento;
 
     public Empleado() {
 
@@ -53,11 +44,11 @@ public class Empleado {
         this.telefono = telefono;
     }
 
-    public Departamento getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(Departamento departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 
