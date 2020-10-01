@@ -10,12 +10,14 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     private DefaultTableModel table;
     private DepartamentoDAO depD;
     private Departamento depa;
+    private IDAO daoPojo;
     
     public DepartamentoGUI() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         depD = new DepartamentoDAO();
+        daoPojo = FactoryMethod.create(FactoryMethod.TypeDAO.DEPARTAMENTO);
         cargar();
     }
     
@@ -196,12 +198,13 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+       
         depa = new Departamento();
 
         depa.setClave(clave.getText());
         depa.setNombre(nombre.getText());
              
-        if (depD.insert(depa)) {
+        if (daoPojo.insert(depa)) {
             JOptionPane.showMessageDialog(null, "Creado Correctamente");
             limpiar();
             cargar();
@@ -213,12 +216,13 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+       
         depa = new Departamento();
 
         depa.setClave(clave.getText());
         depa.setNombre(nombre.getText());
              
-        if (depD.update(depa)) {
+        if (daoPojo.update(depa)) {
             JOptionPane.showMessageDialog(null, "Actualizado Correctamente");
             limpiar();
             cargar();
@@ -230,7 +234,8 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         if (depD.delete(clave.getText())) {
+        
+        if (daoPojo.delete(clave.getText())) {
             JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
             limpiar();
             cargar();

@@ -5,6 +5,10 @@ public class Departamento {
     private String nombre;
     private String clave;
 
+    public Departamento() {
+        
+    }
+
     public String getNombre() {
         return nombre;
     }

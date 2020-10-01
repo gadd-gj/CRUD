@@ -10,12 +10,14 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     private DefaultTableModel table;
     private EmpleadoDAO empD;
     private Empleado emp;
+    private IDAO daoPojo;
     
     public EmpleadoGUI() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         empD = new EmpleadoDAO();
+        daoPojo = FactoryMethod.create(FactoryMethod.TypeDAO.EMPLEADO);
         cargar();
     }
     
@@ -246,14 +248,16 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        
         emp = new Empleado();
-
+        
         emp.setClave(clave.getText());
         emp.setNombre(nombre.getText());
         emp.setDireccion(direccion.getText());
         emp.setTelefono(telefono.getText());
         emp.setDepartamento(departamento.getText());
-        if (empD.update(emp)) {
+        
+        if (daoPojo.update(emp)) {
             JOptionPane.showMessageDialog(null, "Actualizado Correctamente");
             limpiar();
             cargar();
@@ -265,27 +269,29 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        
         emp = new Empleado();
-
+        
         emp.setClave(clave.getText());
         emp.setNombre(nombre.getText());
         emp.setDireccion(direccion.getText());
         emp.setTelefono(telefono.getText());
         emp.setDepartamento(departamento.getText());
      
-        if (empD.insert(emp)) {
+        if (daoPojo.insert(emp)) {
             JOptionPane.showMessageDialog(null, "Creado Correctamente");
             limpiar();
             cargar();
         } else {
             JOptionPane.showMessageDialog(null, "ya Date de baja");
         }
-
+        
         inputClear();
+        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (empD.delete(clave.getText())) {
+        if (daoPojo.delete(clave.getText())) {
             JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
             limpiar();
             cargar();
@@ -297,7 +303,9 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+                
         emp = empD.searchById(clave.getText());
+        
         limpiar();
         Object [] filas = new Object[5];
         filas[0] = emp.getClave();
