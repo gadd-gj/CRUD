@@ -247,7 +247,7 @@ public class DepartamentoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        depa = depD.searchById(clave.getText());
+        depa = (Departamento) daoPojo.searchById(clave.getText());
         limpiar();
         Object [] filas = new Object[2];
         filas[0] = depa.getClave();

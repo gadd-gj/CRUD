@@ -23,7 +23,7 @@ public class EmpleadoGUI extends javax.swing.JFrame {
     
     private void cargar(){
         table = (DefaultTableModel) mostrar.getModel();
-        List<Empleado> list = empD.showAll();
+        List<Empleado> list = daoPojo.showAll();
         Object [] filas = new Object[5];
         for (Empleado listEmp : list) {
             filas[0] = listEmp.getClave();
@@ -304,7 +304,7 @@ public class EmpleadoGUI extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
                 
-        emp = empD.searchById(clave.getText());
+        emp = (Empleado) daoPojo.searchById(clave.getText());
         
         limpiar();
         Object [] filas = new Object[5];
